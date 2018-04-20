@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Help
+if [ "$@" == "" ]
+then
+    echo "Usage: allkill <program1> <program2> etc..."
+    exit
+fi
+
+
+# Expand arguments and kill
+for var in "$@"
+do
+    echo "Killing $var..."
+    $(ps auxwww |grep -i "$var" | grep -v grep |awk '{print $2}' | xargs kill -9)
+    echo "done."
+done
